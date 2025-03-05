@@ -73,16 +73,22 @@ public class Product {
         this.product_sku = product_sku;
     }
 
+//    @Override
+//    public String toString() {
+//        return "Product{" +
+//                "productID=" + productID +
+//                ", productName='" + productName + '\'' +
+//                ", description='" + description + '\'' +
+//                ", price=" + price +
+//                ", qtyInStock=" + qtyInStock +
+//                ", product_sku='" + product_sku + '\'' +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
-        return "Product{" +
-                "productID=" + productID +
-                ", productName='" + productName + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", qtyInStock=" + qtyInStock +
-                ", product_sku='" + product_sku + '\'' +
-                '}';
+        return "Product [ID: " + productID + ", Name: " + productName + ", Description: " + description + ", Price: " + String.format("%.2f", price) + ", Quantity in Stock: " + qtyInStock + ", product_sku: " + product_sku+"]";
     }
 }
 
