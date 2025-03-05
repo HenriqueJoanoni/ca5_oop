@@ -10,18 +10,18 @@ public class ProductDao extends MySQLDao implements ProductInterface {
 
     public List<Product> listAllProducts() throws DaoException{
         List<Product> products = new ArrayList<>();
-        String query = "SELECT * FROM products";
+        String query = "SELECT * FROM product";
 
         try (Connection connection = this.startConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(query);
              ResultSet resultSet = preparedStatement.executeQuery()) {
 
             while (resultSet.next()) {
-                int id = resultSet.getInt("productID");
-                String name = resultSet.getString("productName");
-                String description = resultSet.getString("description");
-                float price = resultSet.getFloat("price");
-                int qtyInStock = resultSet.getInt("qtyInStock");
+                int id = resultSet.getInt("product_ID");
+                String name = resultSet.getString("product_name");
+                String description = resultSet.getString("product_description");
+                float price = resultSet.getFloat("product_price");
+                int qtyInStock = resultSet.getInt("qty_in_stock");
                 String sku = resultSet.getString("product_sku");
 
                 products.add(new Product(id, name, description, price, qtyInStock, sku));
