@@ -1,5 +1,9 @@
 package org.oop.ca5_oop.Objects;
 
+import org.oop.ca5_oop.DAO.ProductDao;
+import org.oop.ca5_oop.DTO.Product;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
@@ -12,7 +16,10 @@ public class App {
         int choice = 0;
         do {
             choice = runMenu();
-            System.out.println("Chosen " + choice);
+            switch (choice){
+                case 1:
+                    getAllProducts();
+            }
         } while (choice != 7);
     }
 
@@ -30,6 +37,9 @@ public class App {
         choice = kb.nextInt();
         kb.nextLine();
         return choice;
+    }
+
+    public void getAllProducts(){
 
     }
 
