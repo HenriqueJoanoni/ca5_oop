@@ -57,3 +57,4 @@ public class ProductDao extends MySQLDao implements ProductInterface {
         return product;
     }
 }
+
