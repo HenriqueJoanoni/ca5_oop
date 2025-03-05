@@ -1,5 +1,8 @@
 package org.oop.ca5_oop.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
     private int productID;
     private String productName;
