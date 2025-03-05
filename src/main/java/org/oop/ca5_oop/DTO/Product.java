@@ -73,15 +73,6 @@ public class Product {
         this.product_sku = product_sku;
     }
 
-//    public List<Product> getAllProductsWithQuantity(int quantity) {
-//        List<Product> productQty = new ArrayList<>();
-//
-//        if (quantity == this.qtyInStock) {
-//            productQty.add()
-//        }
-//
-//    }
-
     @Override
     public String toString() {
         return "Product{" +
