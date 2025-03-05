@@ -4,6 +4,7 @@ import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +21,12 @@ public class App {
             switch (choice){
                 case 1:
                     getAllProducts();
+                    break;
+                case 2:
+                    getProductByID();
+                    break;
+                case 3:
+                    getProductByID();
             }
         } while (choice != 7);
     }
@@ -41,6 +48,16 @@ public class App {
     }
 
     public void getAllProducts(){
+        try {
+            ProductDao productDao = new ProductDao();
+            List<Product> products = productDao.listAllProducts();
+            for (Product product: products){
+                System.out.println(product);
+            }
+        } catch(DaoException e){
+            System.out.println("Error reading from DB");
+            e.printStackTrace();
+        }
 
     }
   
@@ -50,28 +67,37 @@ public class App {
         Scanner scanner = new Scanner(System.in);
 
         try {
-            List<Product> products = productDao.listAllProducts();
-            for (Product product : products) {
-                System.out.println(product);
-            }
-
             System.out.println("\nEnter Product ID to get product: ");
             int productId = scanner.nextInt();
+            scanner.nextLine();
 
 
             Product product = productDao.getProductById(productId);
             if (product != null) {
-                System.out.println("\nProduct Details:");
+                System.out.println("--Product Details:");
                 System.out.println(product);
             } else {
-                System.out.println("\nNo product found with ID: " + productId);
+                System.out.println("--No product found with ID: " + productId);
             }
         } catch (DaoException e) {
-            System.out.println("Error retrieving product: " + e.getMessage());
+            System.out.println("--Error retrieving product: " + e.getMessage());
             e.printStackTrace();
         }
 
-        scanner.close();
+
+    }
+
+    public void deleteProductByID(){
+        Scanner kb = new Scanner(System.in);
+        ProductDao productDao = new ProductDao();
+
+        try {
+            System.out.println("Enter ID of product to delete:");
+            int ID = kb.nextInt();
+            kb.nextLine();
+
+
+        }
     }
 }
 
