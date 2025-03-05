@@ -1,5 +1,8 @@
 package org.oop.ca5_oop.DTO;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
     private int productID;
     private String productName;
@@ -69,6 +72,15 @@ public class Product {
     public void setProduct_sku(String product_sku) {
         this.product_sku = product_sku;
     }
+
+//    public List<Product> getAllProductsWithQuantity(int quantity) {
+//        List<Product> productQty = new ArrayList<>();
+//
+//        if (quantity == this.qtyInStock) {
+//            productQty.add()
+//        }
+//
+//    }
 
     @Override
     public String toString() {
