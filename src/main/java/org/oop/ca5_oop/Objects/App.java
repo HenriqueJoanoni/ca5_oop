@@ -28,6 +28,9 @@ public class App {
                 case 3:
                     deleteProductById();
                     break;
+                case 4:
+                    createProduct();
+                    break;
             }
         } while (choice != 7);
     }
@@ -90,15 +93,52 @@ public class App {
 
     public void deleteProductById(){
         Scanner kb = new Scanner(System.in);
-        ProductDao productDao = new ProductDao();
+        System.out.print("Enter product key to delete:");
+        int id = kb.nextInt();
+        kb.nextLine();
 
+        ProductDao productDao = new ProductDao();
         try {
-            int id = kb.nextInt();
-            kb.nextLine();
+
             productDao.deleteProductById(id);
         } catch (DaoException e){
             System.out.println("Unable to delete");
         }
+
+
+    }
+
+    public void createProduct(){
+        Scanner kb = new Scanner(System.in);
+        ProductDao productDao = new ProductDao();
+        String productName;
+        String description;
+        float price;
+        int qtyInStock;
+        String product_sku;
+
+        System.out.print("Enter product name:");
+        productName = kb.nextLine();
+
+        System.out.print("Enter product description:");
+        description = kb.nextLine();
+
+        System.out.print("Enter product price:");
+        price = kb.nextFloat();
+        kb.nextLine();
+
+        System.out.print("Enter quantity in stock:");
+        qtyInStock = kb.nextInt();
+        kb.nextLine();
+
+        System.out.print("Enter product sku");
+        product_sku = kb.nextLine();
+
+        Product newProduct = new Product(productName, description, price, qtyInStock, product_sku);
+
+        productDao.insertProduct(newProduct);
+
+
 
 
     }

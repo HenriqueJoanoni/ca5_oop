@@ -171,7 +171,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
         try {
             Connection conn = startConnection();
             String query = "INSERT INTO product (product_name, product_description, product_price, qty_in_stock, product_sku) " +
-                    "VALUES (?, ?, ?, ?, ?";
+                    "VALUES (?, ?, ?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, product.getProductName());
             ps.setString(2, product.getDescription());
@@ -181,10 +181,12 @@ public class ProductDao extends MySQLDao implements ProductInterface {
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0){
-                System.out.println("Product Deleted");
+                System.out.println("Product Inserted");
             }
         } catch (SQLException e){
             System.out.println("Error adding to database");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
