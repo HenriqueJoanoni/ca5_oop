@@ -15,6 +15,10 @@ public interface ProductInterface {
 
     List<Product> findProducts(Product filter) throws DaoException;
 
-    public List<Product> listAllProducts() throws DaoException;
+    List<Product> listAllProducts() throws DaoException;
     Product getProductById(int id) throws DaoException;
+
+    void deleteProductById(int ID) throws DaoException;
+
+    void insertProduct(Product product) throws DaoException;
 }

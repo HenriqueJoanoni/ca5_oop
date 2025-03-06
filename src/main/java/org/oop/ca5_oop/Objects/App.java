@@ -26,7 +26,8 @@ public class App {
                     getProductByID();
                     break;
                 case 3:
-                    getProductByID();
+                    deleteProductById();
+                    break;
             }
         } while (choice != 7);
     }
@@ -87,17 +88,22 @@ public class App {
 
     }
 
-    public void deleteProductByID(){
+    public void deleteProductById(){
         Scanner kb = new Scanner(System.in);
         ProductDao productDao = new ProductDao();
 
         try {
-            System.out.println("Enter ID of product to delete:");
-            int ID = kb.nextInt();
+            int id = kb.nextInt();
             kb.nextLine();
-
-
+            productDao.deleteProductById(id);
+        } catch (DaoException e){
+            System.out.println("Unable to delete");
         }
+
+
     }
+
+
+
 }
 

@@ -4,7 +4,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.oop.ca5_oop.Exception.DaoException;
-import org.oop.ca5_oop.DAO.MySQLDao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -100,6 +99,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
         return products;
     }
 
+    @Override
     public List<Product> listAllProducts() throws DaoException{
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
@@ -148,5 +148,45 @@ public class ProductDao extends MySQLDao implements ProductInterface {
         }
         return product;
     }
+
+    @Override
+    public void deleteProductById(int ID) throws DaoException{
+        try {
+            Connection conn = startConnection();
+            String query = "DELETE FROM product WHERE product_ID = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, ID);
+
+            int affectedRows = ps.executeUpdate();
+            if (affectedRows>0){
+                System.out.println("Product Deleted");
+            }
+        } catch (SQLException e){
+            System.out.println("Error Deleting from database");
+        }
+    }
+
+    @Override
+    public void insertProduct(Product product){
+        try {
+            Connection conn = startConnection();
+            String query = "INSERT INTO product (product_name, product_description, product_price, qty_in_stock, product_sku) " +
+                    "VALUES (?, ?, ?, ?, ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, product.getProductName());
+            ps.setString(2, product.getDescription());
+            ps.setDouble(3, product.getPrice());
+            ps.setInt(4, product.getQtyInStock());
+            ps.setString(5, product.getProduct_sku());
+
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected > 0){
+                System.out.println("Product Deleted");
+            }
+        } catch (SQLException e){
+            System.out.println("Error adding to database");
+        }
+    }
 }
+
 
