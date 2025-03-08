@@ -3,10 +3,12 @@ package org.oop.ca5_oop.Objects;
 import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
+import org.oop.ca5_oop.Handlers.InputHandler;
 
-import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
 
 public class App {
     public static void main(String[] args) {
@@ -14,11 +16,11 @@ public class App {
         app.start();
     }
 
-    public void start(){
+    public void start() {
         int choice = 0;
         do {
             choice = runMenu();
-            switch (choice){
+            switch (choice) {
                 case 1:
                     getAllProducts();
                     break;
@@ -48,7 +50,7 @@ public class App {
         } while (choice != 7);
     }
 
-    public int runMenu(){
+    public int runMenu() {
         Scanner kb = new Scanner(System.in);
         System.out.println("---Menu---");
         System.out.println("1) Get all products.");
@@ -57,6 +59,7 @@ public class App {
         System.out.println("4) Create product.");
         System.out.println("5) Update product.");
         System.out.println("6) Filter products.");
+        System.out.println("7) Exit.");
         System.out.print("--Your choice: ");
         int choice;
         choice = kb.nextInt();
@@ -64,22 +67,20 @@ public class App {
         return choice;
     }
 
-    public void getAllProducts(){
+    public void getAllProducts() {
         try {
             ProductDao productDao = new ProductDao();
             List<Product> products = productDao.listAllProducts();
-            for (Product product: products){
+            for (Product product : products) {
                 System.out.println(product);
             }
-        } catch(DaoException e){
+        } catch (DaoException e) {
             System.out.println("Error reading from DB");
             e.printStackTrace();
         }
-
     }
-  
-  
-    public void getProductByID(){
+
+    public void getProductByID() {
         ProductDao productDao = new ProductDao();
         Scanner scanner = new Scanner(System.in);
 
@@ -87,7 +88,6 @@ public class App {
             System.out.println("\nEnter Product ID to get product: ");
             int productId = scanner.nextInt();
             scanner.nextLine();
-
 
             Product product = productDao.getProductById(productId);
             if (product != null) {
@@ -100,11 +100,9 @@ public class App {
             System.out.println("--Error retrieving product: " + e.getMessage());
             e.printStackTrace();
         }
-
-
     }
 
-    public void deleteProductById(){
+    public void deleteProductById() {
         Scanner kb = new Scanner(System.in);
         System.out.print("Enter product key to delete:");
         int id = kb.nextInt();
@@ -114,14 +112,12 @@ public class App {
         try {
 
             productDao.deleteProductById(id);
-        } catch (DaoException e){
+        } catch (DaoException e) {
             System.out.println("Unable to delete");
         }
-
-
     }
 
-    public void createProduct(){
+    public void createProduct() {
         Scanner kb = new Scanner(System.in);
         ProductDao productDao = new ProductDao();
         String productName;
@@ -150,13 +146,9 @@ public class App {
         Product newProduct = new Product(productName, description, price, qtyInStock, product_sku);
 
         productDao.insertProduct(newProduct);
-
-
-
-
     }
 
-    public void updateProduct(){
+    public void updateProduct() {
         Scanner kb = new Scanner(System.in);
         ProductDao productDao = new ProductDao();
         try {
@@ -165,7 +157,7 @@ public class App {
             kb.nextLine();
 
             Product product = productDao.getProductById(id);
-            if (product==null){
+            if (product == null) {
                 System.out.println("Product not found");
                 return;
             }
@@ -192,51 +184,87 @@ public class App {
             Product updatedProduct = new Product(name, description, price, qtyInStock, productSKU);
             productDao.updateProduct(id, updatedProduct);
             System.out.println("Successfully updated");
-        } catch (DaoException e){
+        } catch (DaoException e) {
             System.out.println("Error updating product:");
             System.out.println(e.getMessage());
         }
     }
 
-    public void filterProducts(){
+    public void filterProducts() {
         Scanner kb = new Scanner(System.in);
         ProductDao productDao = new ProductDao();
+        InputHandler handler = new InputHandler();
+
+        System.out.println("\nSearch Products By:");
+        System.out.println("1. Product Name");
+        System.out.println("2. Description");
+        System.out.println("3. Price");
+        System.out.println("4. Quantity in Stock");
+        System.out.println("5. SKU");
+        System.out.println("6. Back to main menu");
+
+        int userChoice = 0;
+        boolean validChoice = false;
+
+        while (!validChoice) {
+            try {
+                System.out.print("Enter your choice (1-6): ");
+                userChoice = kb.nextInt();
+                kb.nextLine();
+
+                if (userChoice < 1 || userChoice > 6) {
+                    throw new InputMismatchException();
+                }
+                validChoice = true;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input! Please enter a number between 1 and 6.");
+                kb.nextLine();
+            }
+        }
+
+        Product filter = new Product();
 
         try {
-            System.out.print("Names to filter by:");
-            String nameFilter = kb.nextLine();
-
-            System.out.print("Description to filter by:");
-            String descFilter = kb.nextLine();
-
-            System.out.print("Price to search for:");
-            Float priceFilter = kb.nextFloat();
-            kb.nextLine();
-
-            System.out.println("Enter quantity in stock to search for");
-            int qtyInStockFilter = kb.nextInt();
-            kb.nextLine();
-
-            System.out.println("Product SKU to search for:");
-            String productSKUFilter = kb.nextLine();
-
-            Product filterProduct = new Product(nameFilter, descFilter, priceFilter, qtyInStockFilter, productSKUFilter);
-            List<Product> results = productDao.findProducts(filterProduct);
-
-            System.out.println("Results:");
-            for (Product product: results){
-                System.out.println(product);
+            switch (userChoice) {
+                case 1:
+                    handler.handleStringInput(kb, "product name", filter::setProductName);
+                    break;
+                case 2:
+                    handler.handleStringInput(kb, "description", filter::setDescription);
+                    break;
+                case 3:
+                    handler.handleNumericInput(kb, "price (e.g., 19.99)", "float",
+                            () -> filter.setPrice(kb.nextFloat()));
+                    break;
+                case 4:
+                    handler.handleNumericInput(kb, "quantity in stock", "integer",
+                            () -> filter.setQtyInStock(kb.nextInt()));
+                    break;
+                case 5:
+                    handler.handleStringInput(kb, "SKU", filter::setProduct_sku);
+                    break;
+                case 6:
+                    runMenu();
+                    break;
             }
-
+        } catch (Exception e) {
+            System.err.println("Error processing input: " + e.getMessage());
+            return;
         }
-        catch (DaoException e){
-            System.out.println("An error occurred");
-            System.out.println(e.getMessage());
+
+        try {
+            List<Product> results = productDao.findProducts(filter);
+
+            if (results.isEmpty()) {
+                System.out.println("\nNo matching products found.");
+            } else {
+                System.out.println("\nFound " + results.size() + " matching product(s):");
+                results.forEach(System.out::println);
+            }
+        } catch (DaoException e) {
+            System.err.println("\nDatabase error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-
-
-
-
 }
 

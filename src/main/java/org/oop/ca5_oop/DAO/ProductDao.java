@@ -43,18 +43,22 @@ public class ProductDao extends MySQLDao implements ProductInterface {
             conditions.add("product_name = ?");
             parameters.add(filter.getProductName());
         }
+
         if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
             conditions.add("product_description = ?");
             parameters.add(filter.getDescription());
         }
+
         if (filter.getPrice() != 0.0f) {
             conditions.add("product_price = ?");
             parameters.add(filter.getPrice());
         }
+
         if (filter.getQtyInStock() != 0) {
             conditions.add("qty_in_stock = ?");
             parameters.add(filter.getQtyInStock());
         }
+
         if (filter.getProduct_sku() != null && !filter.getProduct_sku().isEmpty()) {
             conditions.add("product_sku = ?");
             parameters.add(filter.getProduct_sku());
@@ -79,10 +83,8 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                 }
             }
 
-            System.out.println(stmt.toString());
-
             ResultSet rs = stmt.executeQuery();
-            System.out.println(rs.toString());
+
             while (rs.next()) {
                 Product product = new Product(
                         rs.getInt("product_ID"),

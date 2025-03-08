@@ -1,8 +1,5 @@
 package org.oop.ca5_oop.DTO;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Product {
     private int productID;
     private String productName;
@@ -11,7 +8,14 @@ public class Product {
     private int qtyInStock;
     private String product_sku;
 
-    public Product(int productID, String productName, String description, float price, int qtyInStock, String product_sku) {
+    public Product(
+            int productID,
+            String productName,
+            String description,
+            float price,
+            int qtyInStock,
+            String product_sku
+    ) {
         this.productID = productID;
         this.productName = productName;
         this.description = description;
@@ -21,8 +25,17 @@ public class Product {
     }
 
     //use this for inserting
-    public Product(String productName, String description, float price, int qtyInStock, String product_sku) {
+    public Product(
+            String productName,
+            String description,
+            float price,
+            int qtyInStock,
+            String product_sku
+    ) {
         this(0, productName, description, price, qtyInStock, product_sku);
+    }
+
+    public Product() {
     }
 
     public int getProductID() {
@@ -73,22 +86,16 @@ public class Product {
         this.product_sku = product_sku;
     }
 
-//    @Override
-//    public String toString() {
-//        return "Product{" +
-//                "productID=" + productID +
-//                ", productName='" + productName + '\'' +
-//                ", description='" + description + '\'' +
-//                ", price=" + price +
-//                ", qtyInStock=" + qtyInStock +
-//                ", product_sku='" + product_sku + '\'' +
-//                '}';
-//    }
-
-
     @Override
     public String toString() {
-        return "Product [ID: " + productID + ", Name: " + productName + ", Description: " + description + ", Price: " + String.format("%.2f", price) + ", Quantity in Stock: " + qtyInStock + ", product_sku: " + product_sku+"]";
+        return "Product [" +
+                "ID: " + productID +
+                ", Name: " + productName +
+                ", Description: " + description +
+                ", Price: " + String.format("%.2f", price) +
+                ", Quantity in Stock: " + qtyInStock +
+                ", product_sku: " + product_sku
+                + "]";
     }
 }
 
