@@ -20,7 +20,7 @@ public class Product {
         this.product_sku = product_sku;
     }
 
-    //use this for instering
+    //use this for inserting
     public Product(String productName, String description, float price, int qtyInStock, String product_sku) {
         this(0, productName, description, price, qtyInStock, product_sku);
     }

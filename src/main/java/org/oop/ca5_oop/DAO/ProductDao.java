@@ -13,7 +13,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
 
     @Override
     public void updateProduct(int productId, Product product) throws DaoException {
-        String query = "UPDATE product SET product_name=?, description=?, price=?, qty_in_stock=?, product_sku=? WHERE product_ID=?";
+        String query = "UPDATE product SET product_name=?, product_description=?, product_price=?, qty_in_stock=?, product_sku=? WHERE product_ID=?";
 
         try (Connection conn = this.startConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -44,11 +44,11 @@ public class ProductDao extends MySQLDao implements ProductInterface {
             parameters.add(filter.getProductName());
         }
         if (filter.getDescription() != null && !filter.getDescription().isEmpty()) {
-            conditions.add("description = ?");
+            conditions.add("product_description = ?");
             parameters.add(filter.getDescription());
         }
         if (filter.getPrice() != 0.0f) {
-            conditions.add("price = ?");
+            conditions.add("product_price = ?");
             parameters.add(filter.getPrice());
         }
         if (filter.getQtyInStock() != 0) {
@@ -79,13 +79,16 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                 }
             }
 
+            System.out.println(stmt.toString());
+
             ResultSet rs = stmt.executeQuery();
+            System.out.println(rs.toString());
             while (rs.next()) {
                 Product product = new Product(
                         rs.getInt("product_ID"),
                         rs.getString("product_name"),
-                        rs.getString("description"),
-                        rs.getFloat("price"),
+                        rs.getString("product_description"),
+                        rs.getFloat("product_price"),
                         rs.getInt("qty_in_stock"),
                         rs.getString("product_sku")
                 );
