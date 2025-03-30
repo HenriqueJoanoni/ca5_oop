@@ -30,7 +30,8 @@ public class ResultsController {
         ObservableList<Product> ol = resultsModel.getObservableProductsList();
         ObservableList<ResultRow> rowsToDisplay = FXCollections.observableArrayList();
         for (Product product: ol){
-            rowsToDisplay.add(new ResultRow(product));
+            //passing a ref to this class to let me call delete method from non static context
+            rowsToDisplay.add(new ResultRow(this, product));
         }
 
         return rowsToDisplay;
@@ -49,8 +50,6 @@ public class ResultsController {
     }
 
 
-
-
     @FXML
     protected void onSearchByIDButtonPressed(){
         if (productIDTextField.getText().equals("")||productIDTextField.getText()==null){
@@ -66,6 +65,12 @@ public class ResultsController {
             System.out.println("Error: ID must be an int");
         }
 
+    }
+
+    public void onDeleteButtonClicked(int id){
+        resultsModel.deleteProduct(id);
+        resultsModel.reloadProductsList();
+        resultsListView.setItems(this.generateResultsRowList());
     }
 
 

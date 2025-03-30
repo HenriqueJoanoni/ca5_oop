@@ -59,5 +59,15 @@ public class ResultsModel {
         }
     }
 
+    public void deleteProduct(int id){
+        try {
+            ProductDao productDao = new ProductDao();
+            productDao.deleteProductById(id);
+        } catch (DaoException e){
+            System.out.println("An error occurred");
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }
