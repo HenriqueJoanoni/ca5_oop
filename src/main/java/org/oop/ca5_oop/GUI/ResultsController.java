@@ -77,12 +77,6 @@ public class ResultsController {
     }
 
     public void onDeleteButtonClicked(int id){
-        /*
-        resultsModel.deleteProduct(id);
-        resultsModel.reloadProductsList();
-        resultsList.setItems(this.generateResultsRowList());
-
-         */
         ConfirmDeleteDialogue confirmDelete = new ConfirmDeleteDialogue(this, id);
         confirmDelete.showAndWait();
     }

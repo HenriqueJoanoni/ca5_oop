@@ -11,10 +11,7 @@ import javafx.stage.WindowEvent;
 import org.oop.ca5_oop.DTO.Product;
 
 public class CreateDialogue extends Stage {
-    //https://examples.javacodegeeks.com/java-development/desktop-java/javafx/dialog-javafx/javafx-dialog-example/
-    //code referenced from https://www.geeksforgeeks.org/javafx-textinputdialog/
-    //https://docs.oracle.com/javase/8//javafx/api/javafx/scene/control/Dialog.html#:~:text=A%20Dialog%20in%20JavaFX%20wraps%20a%20DialogPane%20and,alternative%20options%20%28such%20as%20%27lightweight%27%20or%20%27internal%27%20dialogs%29.
-    //https://codingtechroom.com/question/javafx-close-dialog-programmatically
+
 
 
     CreateDialogue(ResultsController rc){

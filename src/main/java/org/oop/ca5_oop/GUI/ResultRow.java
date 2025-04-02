@@ -12,9 +12,7 @@ public class ResultRow extends HBox {
 
 
     ResultRow(ResultsController rc, Product product){
-        //code referenced from:
-        //https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ButtonBase.html#setOnAction-javafx.event.EventHandler-
-        //https://docs.oracle.com/javase/8/docs/api/java/awt/event/ActionEvent.html
+
 
 
         if (product!=null){
