@@ -17,8 +17,10 @@ public class GUIAppMain extends Application{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/user-view.fxml"));
         Parent root = loader.load();
 
+
+
         //load scene
-        Scene scene = new Scene(root, 800, 600);
+        Scene scene = new Scene(root, 1000, 800);
         stage.setScene(scene);
         stage.setTitle("CA5");
         stage.show();
