@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Feature 2 complete">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Objects/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Objects/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,33 +51,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUIAppMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JavaFXRun.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;create-GUI&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.41264367&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\chris\OneDrive - Dundalk Institute of Technology\Year 2\OOP\ca5_oop\src\main" />
+    </key>
+  </component>
   <component name="RunManager">
-    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.Objects.App" />
+    <configuration name="JavaFXRun" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.GUIAppMain" />
       <module name="ca5_oop" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.oop.ca5_oop.Objects.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -82,6 +91,7 @@
         <item itemvalue="Application.App" />
       </list>
     </recent_temporary>
+
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -99,7 +109,31 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741214570848</updated>
-      <workItem from="1741214572237" duration="3638000" />
+      <workItem from="1741214572237" duration="4721000" />
+      <workItem from="1741256446812" duration="700000" />
+      <workItem from="1741286788600" duration="1387000" />
+      <workItem from="1741447558236" duration="3837000" />
+      <workItem from="1743025664282" duration="1087000" />
+      <workItem from="1743026856215" duration="35000" />
+      <workItem from="1743032539326" duration="1766000" />
+      <workItem from="1743034357753" duration="89000" />
+      <workItem from="1743121212538" duration="593000" />
+      <workItem from="1743158020685" duration="784000" />
+      <workItem from="1743203291700" duration="145000" />
+      <workItem from="1743203585586" duration="3556000" />
+      <workItem from="1743208452471" duration="405000" />
+      <workItem from="1743208887074" duration="47000" />
+      <workItem from="1743208947021" duration="76000" />
+      <workItem from="1743209225358" duration="656000" />
+      <workItem from="1743256567873" duration="6541000" />
+      <workItem from="1743295726037" duration="3296000" />
+      <workItem from="1743415566828" duration="2305000" />
+      <workItem from="1743422062501" duration="2363000" />
+      <workItem from="1743430504696" duration="2293000" />
+      <workItem from="1743453382151" duration="3496000" />
+      <workItem from="1743517759954" duration="596000" />
+      <workItem from="1743544375159" duration="8006000" />
+      <workItem from="1743602601420" duration="1650000" />
     </task>
     <servers />
   </component>
