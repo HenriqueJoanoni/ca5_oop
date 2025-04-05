@@ -13,6 +13,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,6 +86,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -132,5 +139,9 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Feature 2 complete" />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature 2 complete" />
   </component>
 </project>

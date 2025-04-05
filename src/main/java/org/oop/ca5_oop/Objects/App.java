@@ -4,11 +4,11 @@ import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
 import org.oop.ca5_oop.Handlers.InputHandler;
+import org.oop.ca5_oop.utils.ProductJsonConverter;
 
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 public class App {
     public static void main(String[] args) {
@@ -40,14 +40,19 @@ public class App {
                     filterProducts();
                     break;
                 case 7:
+                    displayAllProductsAsJson();
+                    break;
+                case 8:
+                    displaySingleProductAsJson();
+                    break;
+                case 9:
                     System.out.println("Exiting");
                     break;
                 default:
                     System.out.println("Invalid choice.");
                     break;
-
             }
-        } while (choice != 7);
+        } while (choice != 9);
     }
 
     public int runMenu() {
@@ -59,10 +64,11 @@ public class App {
         System.out.println("4) Create product.");
         System.out.println("5) Update product.");
         System.out.println("6) Filter products.");
-        System.out.println("7) Exit.");
+        System.out.println("7) Show ALL products as JSON.");
+        System.out.println("8) Show ONE product as JSON.");
+        System.out.println("9) Exit.");
         System.out.print("--Your choice: ");
-        int choice;
-        choice = kb.nextInt();
+        int choice = kb.nextInt();
         kb.nextLine();
         return choice;
     }
@@ -110,7 +116,6 @@ public class App {
 
         ProductDao productDao = new ProductDao();
         try {
-
             productDao.deleteProductById(id);
         } catch (DaoException e) {
             System.out.println("Unable to delete");
@@ -140,7 +145,7 @@ public class App {
         qtyInStock = kb.nextInt();
         kb.nextLine();
 
-        System.out.print("Enter product sku");
+        System.out.print("Enter product sku: ");
         product_sku = kb.nextLine();
 
         Product newProduct = new Product(productName, description, price, qtyInStock, product_sku);
@@ -176,9 +181,6 @@ public class App {
             System.out.print("Enter quantity in stock:");
             int qtyInStock = kb.nextInt();
             kb.nextLine();
-
-            //product SKU should be a constant value,
-            // therefore we are choosing not to give the user the ability to update it
 
             String productSKU = product.getProduct_sku();
             Product updatedProduct = new Product(name, description, price, qtyInStock, productSKU);
@@ -266,5 +268,35 @@ public class App {
             e.printStackTrace();
         }
     }
-}
 
+    public void displayAllProductsAsJson() {
+        try {
+            ProductDao dao = new ProductDao();
+            List<Product> products = dao.listAllProducts();
+            String json = ProductJsonConverter.productsListToJsonString(products);
+            System.out.println("\nAll Products in JSON:\n" + json);
+        } catch (DaoException e) {
+            System.out.println("Error converting products to JSON: " + e.getMessage());
+        }
+    }
+
+    public void displaySingleProductAsJson() {
+        Scanner scanner = new Scanner(System.in);
+        ProductDao dao = new ProductDao();
+        try {
+            System.out.print("Enter Product ID to convert to JSON: ");
+            int id = scanner.nextInt();
+            scanner.nextLine();
+
+            Product p = dao.getProductById(id);
+            if (p != null) {
+                String json = ProductJsonConverter.productToJsonString(p);
+                System.out.println("\nProduct in JSON:\n" + json);
+            } else {
+                System.out.println("Product not found.");
+            }
+        } catch (DaoException e) {
+            System.out.println("Error converting product to JSON: " + e.getMessage());
+        }
+    }
+}
