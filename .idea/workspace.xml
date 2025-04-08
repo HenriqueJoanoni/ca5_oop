@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,11 +48,13 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
     &quot;Application.GUIAppMain.executor&quot;: &quot;Run&quot;,
     &quot;Application.JavaFXRun.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
     &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;create-GUI&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;develop&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -77,7 +73,20 @@
       <recent name="C:\Users\chris\OneDrive - Dundalk Institute of Technology\Year 2\OOP\ca5_oop\src\main" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="Client" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.Client" />
+      <module name="ca5_oop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.oop.ca5_oop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="JavaFXRun" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.GUIAppMain" />
       <module name="ca5_oop" />
@@ -86,12 +95,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.App" />
-      </list>
-    </recent_temporary>
-
+    <configuration name="Server" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.Server" />
+      <module name="ca5_oop" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.oop.ca5_oop.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientServer" type="CompoundRunConfigurationType">
+      <toRun name="Client" type="Application" />
+      <toRun name="Server" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.JavaFXRun" />
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.Server" />
+      <item itemvalue="Compound.ClientServer" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -134,6 +161,8 @@
       <workItem from="1743517759954" duration="596000" />
       <workItem from="1743544375159" duration="8006000" />
       <workItem from="1743602601420" duration="1650000" />
+      <workItem from="1744107944622" duration="2608000" />
+      <workItem from="1744111283828" duration="594000" />
     </task>
     <servers />
   </component>
