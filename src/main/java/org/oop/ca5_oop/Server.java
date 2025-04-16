@@ -58,9 +58,13 @@ public class Server {
                             productJSON += "\nEND";
                             socketWriter.println(productJSON);
                         }
+                    }
 
 
-
+                    //delete by id
+                    else if (request.startsWith("delete")){
+                        int id = Integer.parseInt(request.split(" ")[1]);
+                        productDao.deleteProductById(id);
                     }
 
                 }

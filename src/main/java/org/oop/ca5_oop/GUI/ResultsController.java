@@ -187,9 +187,9 @@ public class ResultsController {
     }
 
     public void onConfirmDeleteButtonPressed(int id){
-        resultsModel.deleteProduct(id);
-        resultsModel.reloadProductsList();
-        resultsList.setItems(this.generateResultsRowList());
+        //send req
+        this.outStream.println("delete " + id);
+        this.onDisplayAllProductsButtonPressed();
     }
 
     public void onCreateButtonPressed(){
