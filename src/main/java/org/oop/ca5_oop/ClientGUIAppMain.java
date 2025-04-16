@@ -1,4 +1,5 @@
 package org.oop.ca5_oop;
+
 import javafx.application.Application;
 import javafx.fxml.*;
 import javafx.scene.Parent;
@@ -7,8 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class ClientGUIAppMain extends Application{
-
+public class ClientGUIAppMain extends Application {
 
 
     public static void main(String[] args) {
@@ -25,7 +25,6 @@ public class ClientGUIAppMain extends Application{
         //https://docs.oracle.com/javase/8//javafx/api/javafx/scene/control/Dialog.html#:~:text=A%20Dialog%20in%20JavaFX%20wraps%20a%20DialogPane%20and,alternative%20options%20%28such%20as%20%27lightweight%27%20or%20%27internal%27%20dialogs%29.
         //https://codingtechroom.com/question/javafx-close-dialog-programmatically
 
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/user-view.fxml"));
             Parent root = loader.load();
@@ -35,11 +34,8 @@ public class ClientGUIAppMain extends Application{
             stage.setScene(scene);
             stage.setTitle("CA5");
             stage.show();
-        } catch (Exception e){
-
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
     }
 }

@@ -24,11 +24,11 @@ public class Server {
         server.start();
     }
 
-    public void start(){
+    public void start() {
         try {
             ServerSocket serverSocket = new ServerSocket(SERVER_PORT);
 
-            while (true){
+            while (true) {
                 Socket clientSocket = serverSocket.accept();
                 PrintWriter socketWriter = new PrintWriter(clientSocket.getOutputStream(), true);
                 BufferedReader socketReader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
@@ -38,9 +38,9 @@ public class Server {
                 //DEAL WITH REQUESTS
                 String request = "";
                 ProductDao productDao = new ProductDao();
-                while ((request = socketReader.readLine()) != null && !request.equals("quit")){
+                while ((request = socketReader.readLine()) != null && !request.equals("quit")) {
                     //get all products
-                    if (request.equals("get allProducts")){
+                    if (request.equals("get allProducts")) {
                         List<Product> allProducts = productDao.listAllProducts();
                         String allProductsJSON = ProductJsonConverter.productsListToJsonString(allProducts);
                         allProductsJSON += "\nEND";
@@ -48,10 +48,10 @@ public class Server {
                     }
 
                     //find product by id
-                    else if (request.startsWith("find")){
+                    else if (request.startsWith("find")) {
                         int id = Integer.parseInt(request.split(" ")[1]);
                         Product product = productDao.getProductById(id);
-                        if (product == null){
+                        if (product == null) {
                             socketWriter.println("NOT FOUND\nEND");
                         } else {
                             String productJSON = ProductJsonConverter.productToJsonString(product);
@@ -62,13 +62,13 @@ public class Server {
 
 
                     //delete by id
-                    else if (request.startsWith("delete")){
+                    else if (request.startsWith("delete")) {
                         int id = Integer.parseInt(request.split(" ")[1]);
                         productDao.deleteProductById(id);
                     }
 
                     //create new
-                    else if (request.startsWith("create")){
+                    else if (request.startsWith("create")) {
                         String jsonString = request.substring(7).trim();
                         JSONObject object = new JSONObject(jsonString);
                         productDao.insertProduct(new Product(
@@ -81,7 +81,7 @@ public class Server {
                     }
 
                     //edit product
-                    else if (request.startsWith("update")){
+                    else if (request.startsWith("update")) {
                         String jsonString = request.substring(7).trim();
                         JSONObject object = new JSONObject(jsonString);
                         productDao.updateProduct(object.getInt("productID"), new Product(
@@ -93,23 +93,12 @@ public class Server {
                                 object.getString("product_sku")
                         ));
                     }
-
                 }
-
-
             }
-
-
-
-
         } catch (IOException e) {
             System.out.println("Server error");
-        } catch (DaoException e){
+        } catch (DaoException e) {
 
         }
-
-
     }
-
-
 }

@@ -13,17 +13,14 @@ import org.oop.ca5_oop.DTO.Product;
 
 public class EditDialogue extends Stage {
 
-
-    EditDialogue(GUIController rc, Product product){
+    EditDialogue(GUIController rc, Product product) {
         this.setTitle("Edit Product");
-
 
         Label nameLabel = new Label("Product Name:");
         Label priceLabel = new Label("Product Price:");
         Label descriptionLabel = new Label("Product Description:");
         Label skuLabel = new Label("Product SKU:");
         Label qtyLabel = new Label("Quantity in Stock:");
-
 
         TextField nameTF = new TextField();
         nameTF.setText(product.getProductName());
@@ -43,9 +40,9 @@ public class EditDialogue extends Stage {
         Button confirmChangesButton = new Button("Confirm Changes");
         Button cancelChangesButton = new Button("Cancel");
 
-        confirmChangesButton.setOnAction(new EventHandler<ActionEvent>(){
+        confirmChangesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
+            public void handle(ActionEvent event) {
                 Product newProduct = new Product(
                         product.getProductID(),
                         nameTF.getText(),
@@ -60,14 +57,12 @@ public class EditDialogue extends Stage {
             }
         });
 
-
-        cancelChangesButton.setOnAction(new EventHandler<ActionEvent>(){
+        cancelChangesButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
+            public void handle(ActionEvent event) {
                 close();
             }
         });
-
 
         VBox dialogueContent = new VBox();
         dialogueContent.getChildren().addAll(nameLabel, nameTF,

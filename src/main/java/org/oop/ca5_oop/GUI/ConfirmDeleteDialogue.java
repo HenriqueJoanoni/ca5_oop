@@ -11,26 +11,25 @@ import javafx.stage.Stage;
 
 public class ConfirmDeleteDialogue extends Stage {
 
-    ConfirmDeleteDialogue(GUIController rc, int id){
+    ConfirmDeleteDialogue(GUIController rc, int id) {
         Label prompt = new Label("Are you sure you want to delete? This cannot be undone.");
         Button confirmDelete = new Button("Delete");
         Button cancelDelete = new Button("Cancel");
 
-        confirmDelete.setOnAction(new EventHandler<ActionEvent>(){
+        confirmDelete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
+            public void handle(ActionEvent event) {
                 rc.onConfirmDeleteButtonPressed(id);
                 close();
             }
         });
 
-        cancelDelete.setOnAction(new EventHandler<ActionEvent>(){
+        cancelDelete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
-            public void handle(ActionEvent event){
+            public void handle(ActionEvent event) {
                 close();
             }
         });
-
 
         VBox content = new VBox();
         content.getChildren().addAll(prompt, confirmDelete, cancelDelete);
@@ -38,6 +37,5 @@ public class ConfirmDeleteDialogue extends Stage {
         Parent sceneParent = (Parent) content;
         Scene dialogueScene = new Scene(sceneParent);
         this.setScene(dialogueScene);
-
     }
 }
