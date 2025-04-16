@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
+import org.oop.ca5_oop.utils.ProductJsonConverter;
 
 import java.io.*;
 import java.net.Socket;
@@ -199,10 +200,12 @@ public class ResultsController {
     }
 
     public void onConfirmCreateButtonPressed(Product newProduct){
-        ProductDao productDao = new ProductDao();
-        productDao.insertProduct(newProduct);
+        //send a request to create to the server
+        String productJSON = ProductJsonConverter.productToJsonString(newProduct);
+        String request = "create " + productJSON.replace('\n', ' '); //need to remove new lines as server reads a line at a time
+        this.outStream.println(request);
+
         this.onDisplayAllProductsButtonPressed();
-        System.out.println("Created");
     }
 
     public void onEditButtonPressed(Product product){
@@ -211,14 +214,12 @@ public class ResultsController {
     }
 
     public void onConfirmEditButtonPressed(Product product){
-        ProductDao productDao = new ProductDao();
-        try {
-            productDao.updateProduct(product.getProductID(), product);
-            this.onDisplayAllProductsButtonPressed();
-        } catch (DaoException e){
-            System.out.println("An error occurred.");
-            System.out.println(e.getMessage());
-        }
+        //send a request to edit to the server
+        String productJSON = ProductJsonConverter.productToJsonString(product);
+        String request = "update " + productJSON.replace('\n', ' '); //need to remove new lines as server reads a line at a time
+        this.outStream.println(request);
+
+        this.onDisplayAllProductsButtonPressed();
     }
 
 

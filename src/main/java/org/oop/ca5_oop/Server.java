@@ -1,5 +1,6 @@
 package org.oop.ca5_oop;
 
+import org.json.JSONObject;
 import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
@@ -65,6 +66,33 @@ public class Server {
                     else if (request.startsWith("delete")){
                         int id = Integer.parseInt(request.split(" ")[1]);
                         productDao.deleteProductById(id);
+                    }
+
+                    //create new
+                    else if (request.startsWith("create")){
+                        String jsonString = request.substring(7).trim();
+                        JSONObject object = new JSONObject(jsonString);
+                        productDao.insertProduct(new Product(
+                                object.getString("productName"),
+                                object.getString("description"),
+                                object.getFloat("price"),
+                                object.getInt("qtyInStock"),
+                                object.getString("product_sku")
+                        ));
+                    }
+
+                    //edit product
+                    else if (request.startsWith("update")){
+                        String jsonString = request.substring(7).trim();
+                        JSONObject object = new JSONObject(jsonString);
+                        productDao.updateProduct(object.getInt("productID"), new Product(
+                                object.getInt("productID"),
+                                object.getString("productName"),
+                                object.getString("description"),
+                                object.getFloat("price"),
+                                object.getInt("qtyInStock"),
+                                object.getString("product_sku")
+                        ));
                     }
 
                 }
