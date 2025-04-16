@@ -5,7 +5,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -15,7 +14,7 @@ import org.oop.ca5_oop.DTO.Product;
 public class EditDialogue extends Stage {
 
 
-    EditDialogue(ResultsController rc, Product product){
+    EditDialogue(GUIController rc, Product product){
         this.setTitle("Edit Product");
 
 

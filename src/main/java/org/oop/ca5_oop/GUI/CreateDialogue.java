@@ -7,14 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.oop.ca5_oop.DTO.Product;
 
 public class CreateDialogue extends Stage {
 
 
 
-    CreateDialogue(ResultsController rc){
+    CreateDialogue(GUIController rc){
         this.setTitle("Create Product");
 
 

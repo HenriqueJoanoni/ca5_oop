@@ -7,7 +7,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class GUIAppMain extends Application{
+public class ClientGUIAppMain extends Application{
+
+
+
     public static void main(String[] args) {
         launch();
     }
@@ -23,15 +26,20 @@ public class GUIAppMain extends Application{
         //https://codingtechroom.com/question/javafx-close-dialog-programmatically
 
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/user-view.fxml"));
-        Parent root = loader.load();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/user-view.fxml"));
+            Parent root = loader.load();
+
+            //load scene
+            Scene scene = new Scene(root, 1000, 800);
+            stage.setScene(scene);
+            stage.setTitle("CA5");
+            stage.show();
+        } catch (Exception e){
+
+            System.out.println(e.getMessage());
+        }
 
 
-
-        //load scene
-        Scene scene = new Scene(root, 1000, 800);
-        stage.setScene(scene);
-        stage.setTitle("CA5");
-        stage.show();
     }
 }

@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class ConfirmDeleteDialogue extends Stage {
 
-    ConfirmDeleteDialogue(ResultsController rc, int id){
+    ConfirmDeleteDialogue(GUIController rc, int id){
         Label prompt = new Label("Are you sure you want to delete? This cannot be undone.");
         Button confirmDelete = new Button("Delete");
         Button cancelDelete = new Button("Cancel");
