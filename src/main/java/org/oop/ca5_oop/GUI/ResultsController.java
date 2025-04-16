@@ -2,20 +2,29 @@ package org.oop.ca5_oop.GUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
 
-import java.util.ArrayList;
+import java.io.*;
+import java.net.Socket;
 import java.util.InputMismatchException;
-import java.util.List;
 
 public class ResultsController {
     private ResultsModel resultsModel;
+    final static int SERVER_PORT = 1024;
+    protected Socket socket;
+
+    protected BufferedReader inStream;
+    protected PrintWriter outStream;
+
+
+    //PRODUCTS LIST
+    ObservableList<Product> observableProductsList = FXCollections.observableArrayList();
+
 
 
     @FXML
@@ -34,10 +43,48 @@ public class ResultsController {
     private ListView<Product> resultsList;
 
 
+    public ResultsController(){
+        //this.resultsModel = new ResultsModel();
+        //this.resultsModel.reloadProductsList();
+
+
+        //connect to server
+        try {
+            Socket socket = new Socket("localhost", SERVER_PORT);
+            this.socket = socket;
+
+    
+            PrintWriter outStream = new PrintWriter(this.socket.getOutputStream(), true);
+            BufferedReader inStream = new BufferedReader( new InputStreamReader(socket.getInputStream()));
+
+
+            //set instance vars
+
+            this.outStream = outStream;
+            this.inStream = inStream;
+
+
+            this.outStream.println("Connection Request");
+
+
+        } catch (Exception e){
+            System.out.println("Error connecting to server");
+            System.out.println(e.getMessage());
+        }
+        System.out.println("Client Running");
+
+    }
+
+
+
+
+
     private ObservableList generateResultsRowList(){
-        ObservableList<Product> ol = resultsModel.getObservableProductsList();
+        //this generates the Row elements to be displayed inside the ListView
+
+
         ObservableList<ResultRow> rowsToDisplay = FXCollections.observableArrayList();
-        for (Product product: ol){
+        for (Product product: observableProductsList){
             //passing a ref to this class to let me call delete method from non static context
             //rowsToDisplay.add(new ResultRow(this, product));
             rowsToDisplay.add(new ResultRow(this, product));
@@ -46,16 +93,45 @@ public class ResultsController {
         return rowsToDisplay;
     }
 
-    public ResultsController(){
-        this.resultsModel = new ResultsModel();
-        this.resultsModel.reloadProductsList();
 
-    }
 
     @FXML
     protected void onDisplayAllProductsButtonPressed(){
-        resultsModel.reloadProductsList();
-        resultsList.setItems(this.generateResultsRowList());
+        try {
+            //send req
+            this.outStream.println("get allProducts");
+
+            //await res
+            StringBuilder productsJson = new StringBuilder();
+            String nextLine = "";
+            while ((nextLine = this.inStream.readLine()) != null && !nextLine.equals("END")){
+                productsJson.append(nextLine).append("\n");
+            }
+
+
+            //reset products array
+            observableProductsList.clear();
+            JSONArray jsonArray = new JSONArray(productsJson.toString().trim());
+            for (int i=0;i<jsonArray.length();i++){
+                JSONObject object = (JSONObject) jsonArray.get(i);
+                observableProductsList.add(new Product(
+                        object.getInt("productID"),
+                        object.getString("productName"),
+                        object.getString("description"),
+                        object.getFloat("price"),
+                        object.getInt("qtyInStock"),
+                        object.getString("product_sku")
+                ));
+            }
+
+            //rerender list
+            resultsList.setItems(this.generateResultsRowList());
+        } catch (Exception e){
+            System.out.println("An error occurred");
+            System.out.println(e.getMessage());
+            System.exit(1);
+        }
+
     }
 
 
@@ -67,11 +143,40 @@ public class ResultsController {
         try {
             //find product, check for non int input
             int id = Integer.parseInt(productIDTextField.getText());
-            resultsModel.findByID(id);
+
+
+            //send req
+            this.outStream.println("find " + id);
+
+            //await res
+            //await res
+            StringBuilder productJsonSB = new StringBuilder();
+            String nextLine = "";
+            while ((nextLine = this.inStream.readLine()) != null && !nextLine.equals("END")){
+                productJsonSB.append(nextLine).append("\n");
+            }
+            String productJSON = productJsonSB.toString().trim();
+
+
+            System.out.println(productJSON);
+            if (!productJSON.equals("NOT FOUND")){
+                JSONObject object = new JSONObject(productJSON.toString().trim());
+                observableProductsList.add(new Product(
+                        object.getInt("productID"),
+                        object.getString("productName"),
+                        object.getString("description"),
+                        object.getFloat("price"),
+                        object.getInt("qtyInStock"),
+                        object.getString("product_sku")
+                ));
+            }
 
             resultsList.setItems(this.generateResultsRowList());
         } catch (InputMismatchException e){
             System.out.println("Error: ID must be an int");
+        } catch(IOException e){
+            System.out.println("An error occurred");
+            System.out.println(e.getMessage());
         }
 
     }

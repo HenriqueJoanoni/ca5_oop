@@ -31,6 +31,10 @@ public class ResultsModel {
         }
     }
 
+    public void populateList(String json){
+
+    }
+
     public ResultsModel(){
         this.observableProductsList = FXCollections.observableArrayList();
         this.reloadProductsList();
