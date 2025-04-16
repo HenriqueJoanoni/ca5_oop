@@ -6,9 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Client.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/ClientGUIAppMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +96,7 @@
       </method>
     </configuration>
     <configuration name="JavaFXRun" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.GUIAppMain" />
+      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.ClientGUIAppMain" />
       <module name="ca5_oop" />
       <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
@@ -166,7 +173,7 @@
       <workItem from="1744111283828" duration="2176000" />
       <workItem from="1744223854008" duration="2709000" />
       <workItem from="1744228756351" duration="1055000" />
-      <workItem from="1744755276086" duration="14893000" />
+      <workItem from="1744755276086" duration="15659000" />
     </task>
     <servers />
   </component>

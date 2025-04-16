@@ -5,12 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.IOException;
-import java.net.Socket;
 
-public class GUIAppMain extends Application{
+public class ClientGUIAppMain extends Application{
 
 
 

@@ -5,17 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
-import org.oop.ca5_oop.Exception.DaoException;
 import org.oop.ca5_oop.utils.ProductJsonConverter;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.InputMismatchException;
 
-public class ResultsController {
-    private ResultsModel resultsModel;
+public class GUIController {
     final static int SERVER_PORT = 1024;
     protected Socket socket;
 
@@ -44,11 +41,7 @@ public class ResultsController {
     private ListView<Product> resultsList;
 
 
-    public ResultsController(){
-        //this.resultsModel = new ResultsModel();
-        //this.resultsModel.reloadProductsList();
-
-
+    public GUIController(){
         //connect to server
         try {
             Socket socket = new Socket("localhost", SERVER_PORT);
@@ -60,12 +53,8 @@ public class ResultsController {
 
 
             //set instance vars
-
             this.outStream = outStream;
             this.inStream = inStream;
-
-
-            this.outStream.println("Connection Request");
 
 
         } catch (Exception e){
@@ -82,7 +71,6 @@ public class ResultsController {
 
     private ObservableList generateResultsRowList(){
         //this generates the Row elements to be displayed inside the ListView
-
 
         ObservableList<ResultRow> rowsToDisplay = FXCollections.observableArrayList();
         for (Product product: observableProductsList){
@@ -150,7 +138,7 @@ public class ResultsController {
             this.outStream.println("find " + id);
 
             //await res
-            //await res
+            observableProductsList.clear();
             StringBuilder productJsonSB = new StringBuilder();
             String nextLine = "";
             while ((nextLine = this.inStream.readLine()) != null && !nextLine.equals("END")){
@@ -158,8 +146,6 @@ public class ResultsController {
             }
             String productJSON = productJsonSB.toString().trim();
 
-
-            System.out.println(productJSON);
             if (!productJSON.equals("NOT FOUND")){
                 JSONObject object = new JSONObject(productJSON.toString().trim());
                 observableProductsList.add(new Product(

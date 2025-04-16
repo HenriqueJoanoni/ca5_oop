@@ -3,7 +3,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.layout.HBox;
 import org.oop.ca5_oop.DTO.Product;
 
@@ -11,7 +10,7 @@ public class ResultRow extends HBox {
 
 
 
-    ResultRow(ResultsController rc, Product product){
+    ResultRow(GUIController rc, Product product){
 
 
 

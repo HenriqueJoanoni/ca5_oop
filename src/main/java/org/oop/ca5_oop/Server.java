@@ -4,7 +4,6 @@ import org.json.JSONObject;
 import org.oop.ca5_oop.DAO.ProductDao;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.Exception.DaoException;
-import org.oop.ca5_oop.GUI.ResultsModel;
 import org.oop.ca5_oop.utils.ProductJsonConverter;
 
 import java.io.BufferedReader;
