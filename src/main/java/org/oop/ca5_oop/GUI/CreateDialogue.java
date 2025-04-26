@@ -5,78 +5,106 @@ import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.oop.ca5_oop.DTO.Product;
 
+import java.io.File;
+
 public class CreateDialogue extends Stage {
 
-
+    private String selectedImageFileName = null;
 
     CreateDialogue(GUIController rc){
-        this.setTitle("Create Product");
+        this.setTitle("Create New Product");
 
-
-
-
+        VBox dialogueContent = new VBox(10);
+        dialogueContent.setStyle("-fx-background-color: #f0f0f0; -fx-padding: 20; -fx-border-radius: 10; -fx-background-radius: 10;");
 
         Label nameLabel = new Label("Product Name:");
-        Label priceLabel = new Label("Product Price:");
-        Label descriptionLabel = new Label("Product Description:");
-        Label skuLabel = new Label("Product SKU:");
-        Label qtyLabel = new Label("Quantity in Stock:");
-
-
         TextField nameTF = new TextField();
+
+        Label priceLabel = new Label("Product Price:");
         TextField priceTF = new TextField();
+
+        Label descriptionLabel = new Label("Product Description:");
         TextField descriptionTF = new TextField();
+
+        Label skuLabel = new Label("Product SKU:");
         TextField skuTF = new TextField();
+
+        Label qtyLabel = new Label("Quantity in Stock:");
         TextField qtyTF = new TextField();
 
+        // 📸 Image Upload
+        Label imageLabel = new Label("Product Image:");
+        Button uploadImageButton = new Button("Choose Image");
+        ImageView selectedImagePreview = new ImageView();
+        selectedImagePreview.setFitWidth(100);
+        selectedImagePreview.setFitHeight(100);
+        selectedImagePreview.setPreserveRatio(true);
+
+        uploadImageButton.setOnAction(event -> {
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose Product Image");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("Image Files", "*.jpg", "*.jpeg", "*.png")
+            );
+            File selectedFile = fileChooser.showOpenDialog(this);
+            if (selectedFile != null) {
+                selectedImageFileName = selectedFile.getName();
+                selectedImagePreview.setImage(new Image(selectedFile.toURI().toString()));
+            }
+        });
+
+        HBox imageUploadBox = new HBox(10, uploadImageButton, selectedImagePreview);
+
         Button confirmCreateButton = new Button("Create Product");
-
-
-
-        confirmCreateButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                Product newProduct = new Product(0,
-                                                nameTF.getText(),
-                                                descriptionTF.getText(),
-                                                Float.valueOf(priceTF.getText()),
-                                                Integer.parseInt(qtyTF.getText()),
-                                                skuTF.getText()
-                                                );
-                rc.onConfirmCreateButtonPressed(newProduct);
-                System.out.println("Should be here");
-                close();
-
-            }
-        });
-
-
         Button cancelButton = new Button("Cancel");
-        cancelButton.setCancelButton(true);
-        cancelButton.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
+
+        confirmCreateButton.setOnAction(event -> {
+            try {
+                String finalImageName = (selectedImageFileName != null && !selectedImageFileName.trim().isEmpty())
+                        ? selectedImageFileName
+                        : "no_photo.png";
+
+                Product newProduct = new Product(
+                        nameTF.getText(),
+                        descriptionTF.getText(),
+                        Float.parseFloat(priceTF.getText()),
+                        Integer.parseInt(qtyTF.getText()),
+                        skuTF.getText(),
+                        finalImageName
+                );
+
+                rc.onConfirmCreateButtonPressed(newProduct);
                 close();
+            } catch (Exception e) {
+                System.out.println("Error creating product: " + e.getMessage());
             }
         });
 
-        VBox dialogueContent = new VBox();
-        dialogueContent.getChildren().addAll(nameLabel, nameTF,
-                                            priceLabel, priceTF,
-                                            descriptionLabel, descriptionTF,
-                                            skuLabel, skuTF,
-                                            qtyLabel, qtyTF,
-                                            cancelButton,
-                                            confirmCreateButton);
 
-        Parent sceneParent = (Parent) dialogueContent;
-        Scene dialogueScene = new Scene(sceneParent);
+        cancelButton.setOnAction(event -> close());
+
+        HBox buttons = new HBox(15, cancelButton, confirmCreateButton);
+        buttons.setStyle("-fx-alignment: center; -fx-padding: 10;");
+
+        dialogueContent.getChildren().addAll(
+                nameLabel, nameTF,
+                priceLabel, priceTF,
+                descriptionLabel, descriptionTF,
+                skuLabel, skuTF,
+                qtyLabel, qtyTF,
+                imageLabel, imageUploadBox,
+                buttons
+        );
+
+        Parent sceneParent = dialogueContent;
+        Scene dialogueScene = new Scene(sceneParent, 400, 600);
         this.setScene(dialogueScene);
-
-
     }
 }

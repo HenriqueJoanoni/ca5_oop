@@ -1,13 +1,13 @@
 package org.oop.ca5_oop.GUI;
 
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import org.oop.ca5_oop.DTO.Product;
 
 import java.io.File;
@@ -16,7 +16,7 @@ import java.io.FileNotFoundException;
 
 public class ResultRow extends HBox {
 
-    ResultRow(GUIController rc, Product product) {
+    public ResultRow(GUIController rc, Product product) {
 
         if (product != null) {
             ImageView productImageView = new ImageView();
@@ -26,52 +26,68 @@ public class ResultRow extends HBox {
             productImageView.setSmooth(true);
             productImageView.setCache(true);
 
-
             try {
-                String filename = product.getProductName().replaceAll(" ", "_").toLowerCase() + ".jpg";
-                File imageFile = new File("downloaded_images/" + filename);
-
-                if (imageFile.exists()) {
-                    Image productImage = new Image(new FileInputStream(imageFile));
-                    productImageView.setImage(productImage);
-                } else {
-                    File defaultImageFile = new File("downloaded_images/no_photo.png");
-                    if (defaultImageFile.exists()) {
-                        Image defaultImage = new Image(new FileInputStream(defaultImageFile));
-                        productImageView.setImage(defaultImage);
+                String imageName = product.getImageName();
+                if (imageName != null && !imageName.isEmpty()) {
+                    File imageFile = new File("downloaded_images/" + imageName);
+                    if (imageFile.exists()) {
+                        Image productImage = new Image(new FileInputStream(imageFile));
+                        productImageView.setImage(productImage);
+                    } else {
+                        loadDefaultImage(productImageView);
                     }
+                } else {
+                    loadDefaultImage(productImageView);
                 }
-            } catch (FileNotFoundException e) {
+            } catch (Exception e) {
                 System.out.println("Could not load image for product: " + product.getProductName());
                 e.printStackTrace();
+                loadDefaultImage(productImageView);
             }
 
+            Label productInfoLabel = new Label(
+                    "ID: " + product.getProductID() +
+                            ", Product: " + product.getProductName() +
+                            ", Price: €" + String.format("%.2f", product.getPrice()) +
+                            ", Qty In Stock: " + product.getQtyInStock()
+            );
+            productInfoLabel.setStyle("-fx-font-size: 14px;");
+
             Button deleteButton = new Button("Delete");
-            deleteButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    rc.onDeleteButtonClicked(product.getProductID());
-                }
+            deleteButton.setOnAction((ActionEvent event) -> {
+                rc.onDeleteButtonClicked(product.getProductID());
             });
+            deleteButton.setStyle("-fx-background-color: #b22222; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;");
 
             Button editButton = new Button("Edit");
-            editButton.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    rc.onEditButtonPressed(product);
-                }
+            editButton.setOnAction((ActionEvent event) -> {
+                rc.onEditButtonPressed(product);
             });
+            editButton.setStyle("-fx-background-color: gray; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8; -fx-cursor: hand;");
 
-            Label productInfoLabel = new Label("ID: " + product.getProductID() +
-                    ", Product: " + product.getProductName() +
-                    ", Price: €" + product.getPrice() +
-                    ", Qty In Stock: " + product.getQtyInStock() + "\t");
+            Region spacer = new Region();
+            HBox.setHgrow(spacer, Priority.ALWAYS);
 
-            this.setSpacing(10);
-            this.getChildren().addAll(productImageView, productInfoLabel, deleteButton, editButton);
 
+            this.setSpacing(20);
+            this.getChildren().addAll(productImageView, productInfoLabel, spacer, deleteButton, editButton);
+            this.setStyle("-fx-padding: 10px; -fx-alignment: CENTER_LEFT;");
         } else {
-            this.getChildren().add(new Label("Product Not Found."));
+            Label notFoundLabel = new Label("Product Not Found.");
+            notFoundLabel.setStyle("-fx-text-fill: red;");
+            this.getChildren().add(notFoundLabel);
+        }
+    }
+
+    private void loadDefaultImage(ImageView imageView) {
+        try {
+            File defaultImageFile = new File("downloaded_images/no_photo.png");
+            if (defaultImageFile.exists()) {
+                Image defaultImage = new Image(new FileInputStream(defaultImageFile));
+                imageView.setImage(defaultImage);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 }

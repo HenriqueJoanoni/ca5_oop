@@ -4,11 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added.">
+    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Multithreaded for multiple clients. New ClientHandler.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DTO/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DTO/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Handlers/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Objects/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Objects/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/utils/ProductJsonConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/utils/ProductJsonConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,31 +62,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.App.executor": "Run",
-    "Application.Client.executor": "Run",
-    "Application.ClientGUI2.executor": "Run",
-    "Application.GUIAppMain.executor": "Run",
-    "Application.JavaFXRun.executor": "Run",
-    "Application.Server.executor": "Run",
-    "Application.Unnamed.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "images-q13",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.41264367",
-    "settings.editor.selected.configurable": "preferences.pathVariables",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Client.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ClientGUI2.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GUIAppMain.executor&quot;: &quot;Run&quot;,
+    &quot;Application.JavaFXRun.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Server.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Unnamed.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;images-q13&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.41264367&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pathVariables&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\chris\OneDrive - Dundalk Institute of Technology\Year 2\OOP\ca5_oop\src\main" />
@@ -188,7 +195,8 @@
       <workItem from="1744228756351" duration="1055000" />
       <workItem from="1744755276086" duration="15659000" />
       <workItem from="1745517002208" duration="3386000" />
-      <workItem from="1745677849006" duration="5744000" />
+      <workItem from="1745677849006" duration="11314000" />
+      <workItem from="1745699139164" duration="301000" />
     </task>
     <task id="LOCAL-00001" summary="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added.">
       <option name="closed" value="true" />
@@ -198,7 +206,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745692270374</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Multithreaded for multiple clients. New ClientHandler.">
+      <option name="closed" value="true" />
+      <created>1745693230517</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745693230517</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -208,6 +224,7 @@
     <MESSAGE value="Feature 2 complete" />
     <MESSAGE value="stashed" />
     <MESSAGE value="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added." />
+    <MESSAGE value="Multithreaded for multiple clients. New ClientHandler." />
+    <option name="LAST_COMMIT_MESSAGE" value="Multithreaded for multiple clients. New ClientHandler." />
   </component>
 </project>

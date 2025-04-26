@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.oop.ca5_oop.DTO.Product;
@@ -56,6 +57,16 @@ public class GUIController {
         onDisplayAllProductsButtonPressed();
     }
 
+    @FXML
+    public void initialize() {
+            resultsList.setPrefWidth(1200); // Stretch wide enough (or even 1250)
+            resultsList.setPrefHeight(800);
+            resultsList.setMaxWidth(Double.MAX_VALUE); // 🔥 new: make it fill parent
+            resultsList.setMaxHeight(Double.MAX_VALUE); // 🔥
+            HBox.setHgrow(resultsList, javafx.scene.layout.Priority.ALWAYS);
+        }
+
+
 
 
     public GUIController() {
@@ -99,8 +110,10 @@ public class GUIController {
                         object.getString("description"),
                         object.getFloat("price"),
                         object.getInt("qtyInStock"),
-                        object.getString("product_sku")
+                        object.getString("product_sku"),
+                        object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                 ));
+
             }
 
             resultsList.setItems(this.generateResultsRowList());
@@ -109,6 +122,7 @@ public class GUIController {
             e.printStackTrace();
             System.exit(1);
         }
+
     }
 
     @FXML
@@ -137,7 +151,8 @@ public class GUIController {
                         object.getString("description"),
                         object.getFloat("price"),
                         object.getInt("qtyInStock"),
-                        object.getString("product_sku")
+                        object.getString("product_sku"),
+                        object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                 ));
             }
 

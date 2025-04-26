@@ -59,8 +59,10 @@ public class ClientHandler implements Runnable {
                             object.getString("description"),
                             object.getFloat("price"),
                             object.getInt("qtyInStock"),
-                            object.getString("product_sku")
+                            object.getString("product_sku"),
+                            object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                     ));
+
                 }
                 else if (request.startsWith("update")) {
                     String jsonString = request.substring(7).trim();
@@ -71,8 +73,10 @@ public class ClientHandler implements Runnable {
                             object.getString("description"),
                             object.getFloat("price"),
                             object.getInt("qtyInStock"),
-                            object.getString("product_sku")
+                            object.getString("product_sku"),
+                            object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                     ));
+
                 }
                 else if (request.equals("get images")) {
                     File folder = new File("server_images");
