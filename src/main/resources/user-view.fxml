@@ -10,8 +10,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
+
+
 <VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.ca5_oop.GUI.GUIController">
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="950.0">
@@ -25,29 +27,40 @@
                   </Text>
                </children>
             </VBox>
+
             <ScrollPane layoutX="74.0" layoutY="325.0" prefHeight="239.0" prefWidth="805.0" style="-fx-background-color: #ddd; -fx-border-color: #000;">
                <content>
-                  <ListView fx:id="resultsList" prefHeight="238.0" prefWidth="780.0">
+                  <ListView fx:id="resultsList" prefHeight="238.0" prefWidth="780.0" />
+               </content>
+            </ScrollPane>
 
-                  </ListView>
-               </content></ScrollPane>
             <VBox alignment="CENTER_LEFT" layoutX="76.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="650.0" style="-fx-background-color: #ddd;">
                <children>
                   <Button fx:id="createButton" mnemonicParsing="false" onMousePressed="#onCreateButtonPressed" prefHeight="26.0" prefWidth="120.0" text="Create Product" />
+
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="productIDTextField" promptText="Product ID" />
                         <Button fx:id="searchByIDButton" mnemonicParsing="false" onMousePressed="#onSearchByIDButtonPressed" prefHeight="26.0" prefWidth="85.0" text="Search By ID" />
                      </children>
                   </HBox>
+
                   <Button mnemonicParsing="false" onMousePressed="#onDisplayAllProductsButtonPressed" text="Display All Products" />
+                  <Button fx:id="getImagesButton" mnemonicParsing="false" onMousePressed="#onGetImagesButtonPressed" text="Get Images" />
+
                </children>
             </VBox>
+
             <Text layoutX="76.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results" wrappingWidth="85.60000000000014">
                <font>
                   <Font size="26.0" />
                </font>
             </Text>
+
+            <ImageView fx:id="downloadedImageView" layoutX="800" layoutY="50" fitHeight="200" fitWidth="200" />
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonPressed" text="Exit" />
+
+
          </children>
       </AnchorPane>
    </children>

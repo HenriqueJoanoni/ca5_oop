@@ -4,16 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="">
+    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Feature 2 complete">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ConfirmDeleteDialogue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/CreateDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/MySQLDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/MySQLDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultsModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUIAppMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/ClientGUIAppMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
     </list>
@@ -30,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="develop" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -40,8 +43,8 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HenriqueJoanoni/ca5_oop&quot;,
-    &quot;accountId&quot;: &quot;584f6562-fb06-4908-ae5d-c783b36f8958&quot;
+    &quot;url&quot;: &quot;https://github.com/HenriqueJoanoni/ca5_oop.git&quot;,
+    &quot;accountId&quot;: &quot;662e071c-4caf-4ef9-9525-2e42d7d5c9cc&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -62,7 +65,8 @@
     "Application.Server.executor": "Run",
     "Application.Unnamed.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "client-server",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "images-q13",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/chris/Downloads/mysql-connector-j-9.2.0.jar",
     "node.js.detected.package.eslint": "true",
@@ -98,7 +102,7 @@
     <configuration name="JavaFXRun" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.ClientGUIAppMain" />
       <module name="ca5_oop" />
-      <option name="VM_PARAMETERS" value="--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\javafx-sdk-23.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -131,8 +135,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
-        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -174,6 +178,8 @@
       <workItem from="1744223854008" duration="2709000" />
       <workItem from="1744228756351" duration="1055000" />
       <workItem from="1744755276086" duration="15659000" />
+      <workItem from="1745517002208" duration="3386000" />
+      <workItem from="1745677849006" duration="4508000" />
     </task>
     <servers />
   </component>
@@ -182,6 +188,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feature 2 complete" />
-    <option name="LAST_COMMIT_MESSAGE" value="Feature 2 complete" />
+    <MESSAGE value="stashed" />
+    <option name="LAST_COMMIT_MESSAGE" value="stashed" />
   </component>
 </project>

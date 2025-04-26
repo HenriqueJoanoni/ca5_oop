@@ -106,6 +106,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
 
     @Override
     public List<Product> listAllProducts() throws DaoException{
+        System.out.println("print new");
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
 
@@ -124,6 +125,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                 products.add(new Product(id, name, description, price, qtyInStock, sku));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DaoException("listAllProducts() " + e.getMessage());
         }
         return products;

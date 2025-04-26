@@ -14,6 +14,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.io.File;
+import org.json.JSONArray;
+import java.io.OutputStream;
+import java.io.FileInputStream;
+
 
 public class Server {
     final static int SERVER_PORT = 1024;
@@ -40,12 +45,16 @@ public class Server {
                 ProductDao productDao = new ProductDao();
                 while ((request = socketReader.readLine()) != null && !request.equals("quit")){
                     //get all products
+                    System.out.println(request);
                     if (request.equals("get allProducts")){
+                        System.out.println("print");
+
                         List<Product> allProducts = productDao.listAllProducts();
                         String allProductsJSON = ProductJsonConverter.productsListToJsonString(allProducts);
                         allProductsJSON += "\nEND";
                         socketWriter.println(allProductsJSON);
                     }
+
 
                     //find product by id
                     else if (request.startsWith("find")){
@@ -92,6 +101,38 @@ public class Server {
                                 object.getInt("qtyInStock"),
                                 object.getString("product_sku")
                         ));
+                    }
+
+                    //get images list
+                    else if (request.equals("get images")) {
+                        File folder = new File("server_images");
+                        File[] files = folder.listFiles((dir, name) -> name.toLowerCase().endsWith(".jpg") ||
+                                name.toLowerCase().endsWith(".png") ||
+                                name.toLowerCase().endsWith(".jpeg"));
+
+                        JSONArray imageList = new JSONArray();
+                        for (File file : files) {
+                            imageList.put(file.getName());
+                        }
+                        socketWriter.println(imageList.toString());
+                        socketWriter.println("END");
+                    }
+                    else if (request.startsWith("get image ")) {
+                        String fileName = request.substring(10).trim();
+                        File file = new File("server_images/" + fileName);
+                        if (!file.exists()) {
+                            socketWriter.println("ERROR: File not found");
+                        } else {
+                            OutputStream out = clientSocket.getOutputStream();
+                            FileInputStream fileIn = new FileInputStream(file);
+
+                            byte[] buffer = new byte[4096];
+                            int count;
+                            while ((count = fileIn.read(buffer)) > 0) {
+                                out.write(buffer, 0, count);
+                            }
+                            fileIn.close();
+                        }
                     }
 
                 }

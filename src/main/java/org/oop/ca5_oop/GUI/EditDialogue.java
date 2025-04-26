@@ -26,7 +26,7 @@ public class EditDialogue extends Stage {
 
 
         TextField nameTF = new TextField();
-        nameTF.setText(product.getProductName());
+         nameTF.setText(product.getProductName());
 
         TextField priceTF = new TextField();
         priceTF.setText(String.valueOf(product.getPrice()));
