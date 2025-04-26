@@ -58,6 +58,8 @@
             </Text>
 
             <ImageView fx:id="downloadedImageView" layoutX="800" layoutY="50" fitHeight="200" fitWidth="200" />
+            <Button fx:id="refreshButton" mnemonicParsing="false" onAction="#onRefreshButtonPressed" text="Refresh" />
+
             <Button fx:id="exitButton" mnemonicParsing="false" onAction="#onExitButtonPressed" text="Exit" />
 
 

@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Feature 2 complete">
+    <list default="true" id="172c1ad9-4a5b-41fa-8cde-c1cac796a7f2" name="Changes" comment="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/MySQLDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/MySQLDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/DAO/ProductDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/EditDialogue.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/GUIController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/GUI/ResultRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Handlers/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Handlers/ClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/oop/ca5_oop/Server.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/user-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/user-view.fxml" afterDir="false" />
     </list>
@@ -47,6 +43,9 @@
     &quot;accountId&quot;: &quot;662e071c-4caf-4ef9-9525-2e42d7d5c9cc&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
 }</component>
@@ -60,6 +59,7 @@
   "keyToString": {
     "Application.App.executor": "Run",
     "Application.Client.executor": "Run",
+    "Application.ClientGUI2.executor": "Run",
     "Application.GUIAppMain.executor": "Run",
     "Application.JavaFXRun.executor": "Run",
     "Application.Server.executor": "Run",
@@ -85,7 +85,7 @@
       <recent name="C:\Users\chris\OneDrive - Dundalk Institute of Technology\Year 2\OOP\ca5_oop\src\main" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.JavaFXRun">
+  <component name="RunManager" selected="Application.ClientGUI2">
     <configuration name="Client" type="Application" factoryName="Application" singleton="false" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.Client" />
       <module name="ca5_oop" />
@@ -95,6 +95,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ClientGUI2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="org.oop.ca5_oop.ClientGUIAppMain" />
+      <module name="ca5_oop" />
+      <option name="VM_PARAMETERS" value="--module-path C:\javafx-sdk-23.0.2\lib --add-modules javafx.controls,javafx.fxml " />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -127,6 +135,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.JavaFXRun" />
+      <item itemvalue="Application.ClientGUI2" />
       <item itemvalue="Application.Client" />
       <item itemvalue="Application.Server" />
       <item itemvalue="Compound.ClientServer" />
@@ -179,8 +188,17 @@
       <workItem from="1744228756351" duration="1055000" />
       <workItem from="1744755276086" duration="15659000" />
       <workItem from="1745517002208" duration="3386000" />
-      <workItem from="1745677849006" duration="4508000" />
+      <workItem from="1745677849006" duration="5744000" />
     </task>
+    <task id="LOCAL-00001" summary="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added.">
+      <option name="closed" value="true" />
+      <created>1745692270374</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745692270374</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -189,6 +207,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Feature 2 complete" />
     <MESSAGE value="stashed" />
-    <option name="LAST_COMMIT_MESSAGE" value="stashed" />
+    <MESSAGE value="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Feature 13 (images) done. Feature 14 was quick, button for exit and confirm window added." />
   </component>
 </project>

@@ -51,6 +51,12 @@ public class GUIController {
     @FXML
     private ImageView downloadedImageView;
 
+    @FXML
+    protected void onRefreshButtonPressed() {
+        onDisplayAllProductsButtonPressed();
+    }
+
+
 
     public GUIController() {
         try {
