@@ -1,16 +1,26 @@
 package org.oop.ca5_oop.GUI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.oop.ca5_oop.DTO.Product;
 import org.oop.ca5_oop.utils.ProductJsonConverter;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceDialog;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.InputMismatchException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class GUIController {
     final static int SERVER_PORT = 1024;
@@ -19,11 +29,7 @@ public class GUIController {
     protected BufferedReader inStream;
     protected PrintWriter outStream;
 
-
-    //PRODUCTS LIST
     ObservableList<Product> observableProductsList = FXCollections.observableArrayList();
-
-
 
     @FXML
     public Button showAllProductsButton;
@@ -35,73 +41,68 @@ public class GUIController {
     public Button searchByIDButton;
 
     @FXML
+    public Button getImagesButton;
+
+    @FXML
     public TextField productIDTextField;
 
     @FXML
-    private ListView<Product> resultsList;
+    private ListView<ResultRow> resultsList;
+
+    @FXML
+    private ImageView downloadedImageView;
+
+    @FXML
+    protected void onRefreshButtonPressed() {
+        onDisplayAllProductsButtonPressed();
+    }
+
+    @FXML
+    public void initialize() {
+            resultsList.setPrefWidth(1200); // Stretch wide enough (or even 1250)
+            resultsList.setPrefHeight(800);
+            resultsList.setMaxWidth(Double.MAX_VALUE); // 🔥 new: make it fill parent
+            resultsList.setMaxHeight(Double.MAX_VALUE); // 🔥
+            HBox.setHgrow(resultsList, javafx.scene.layout.Priority.ALWAYS);
+        }
 
 
-    public GUIController(){
-        //connect to server
+
+
+    public GUIController() {
         try {
-            Socket socket = new Socket("localhost", SERVER_PORT);
-            this.socket = socket;
-
-    
-            PrintWriter outStream = new PrintWriter(this.socket.getOutputStream(), true);
-            BufferedReader inStream = new BufferedReader( new InputStreamReader(socket.getInputStream()));
-
-
-            //set instance vars
-            this.outStream = outStream;
-            this.inStream = inStream;
-
-
-        } catch (Exception e){
+            socket = new Socket("localhost", SERVER_PORT);
+            outStream = new PrintWriter(socket.getOutputStream(), true);
+            inStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (Exception e) {
             System.out.println("Error connecting to server");
             System.out.println(e.getMessage());
         }
         System.out.println("Client Running");
-
     }
 
-
-
-
-
-    private ObservableList generateResultsRowList(){
-        //this generates the Row elements to be displayed inside the ListView
-
+    private ObservableList<ResultRow> generateResultsRowList() {
         ObservableList<ResultRow> rowsToDisplay = FXCollections.observableArrayList();
-        for (Product product: observableProductsList){
-            //passing a ref to this class to let me call delete method from non static context
-            //rowsToDisplay.add(new ResultRow(this, product));
+        for (Product product : observableProductsList) {
             rowsToDisplay.add(new ResultRow(this, product));
         }
-
         return rowsToDisplay;
     }
 
-
-
     @FXML
-    protected void onDisplayAllProductsButtonPressed(){
+    protected void onDisplayAllProductsButtonPressed() {
         try {
-            //send req
-            this.outStream.println("get allProducts");
+            outStream.println("get allProducts");
 
-            //await res
             StringBuilder productsJson = new StringBuilder();
-            String nextLine = "";
-            while ((nextLine = this.inStream.readLine()) != null && !nextLine.equals("END")){
+            String nextLine;
+            while ((nextLine = inStream.readLine()) != null && !nextLine.equals("END")) {
                 productsJson.append(nextLine).append("\n");
             }
 
-
-            //reset products array
             observableProductsList.clear();
             JSONArray jsonArray = new JSONArray(productsJson.toString().trim());
-            for (int i=0;i<jsonArray.length();i++){
+            for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject object = (JSONObject) jsonArray.get(i);
                 observableProductsList.add(new Product(
                         object.getInt("productID"),
@@ -109,107 +110,212 @@ public class GUIController {
                         object.getString("description"),
                         object.getFloat("price"),
                         object.getInt("qtyInStock"),
-                        object.getString("product_sku")
+                        object.getString("product_sku"),
+                        object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                 ));
+
             }
 
-            //rerender list
             resultsList.setItems(this.generateResultsRowList());
-        } catch (Exception e){
+        } catch (Exception e) {
             System.out.println("An error occurred");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             System.exit(1);
         }
 
     }
 
-
     @FXML
-    protected void onSearchByIDButtonPressed(){
-        if (productIDTextField.getText().equals("")||productIDTextField.getText()==null){
+    protected void onSearchByIDButtonPressed() {
+        if (productIDTextField.getText().isEmpty()) {
             return;
         }
         try {
-            //find product, check for non int input
             int id = Integer.parseInt(productIDTextField.getText());
 
+            outStream.println("find " + id);
 
-            //send req
-            this.outStream.println("find " + id);
-
-            //await res
             observableProductsList.clear();
             StringBuilder productJsonSB = new StringBuilder();
-            String nextLine = "";
-            while ((nextLine = this.inStream.readLine()) != null && !nextLine.equals("END")){
+            String nextLine;
+            while ((nextLine = inStream.readLine()) != null && !nextLine.equals("END")) {
                 productJsonSB.append(nextLine).append("\n");
             }
             String productJSON = productJsonSB.toString().trim();
 
-            if (!productJSON.equals("NOT FOUND")){
-                JSONObject object = new JSONObject(productJSON.toString().trim());
+            if (!productJSON.equals("NOT FOUND")) {
+                JSONObject object = new JSONObject(productJSON);
                 observableProductsList.add(new Product(
                         object.getInt("productID"),
                         object.getString("productName"),
                         object.getString("description"),
                         object.getFloat("price"),
                         object.getInt("qtyInStock"),
-                        object.getString("product_sku")
+                        object.getString("product_sku"),
+                        object.has("imageName") ? object.getString("imageName") : "no_photo.png"
                 ));
             }
 
             resultsList.setItems(this.generateResultsRowList());
-        } catch (InputMismatchException e){
+        } catch (InputMismatchException e) {
             System.out.println("Error: ID must be an int");
-        } catch(IOException e){
+        } catch (IOException e) {
             System.out.println("An error occurred");
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-
     }
 
-    public void onDeleteButtonClicked(int id){
+    public void onDeleteButtonClicked(int id) {
         ConfirmDeleteDialogue confirmDelete = new ConfirmDeleteDialogue(this, id);
         confirmDelete.showAndWait();
     }
 
-    public void onConfirmDeleteButtonPressed(int id){
-        //send req
-        this.outStream.println("delete " + id);
-        this.onDisplayAllProductsButtonPressed();
+    public void onConfirmDeleteButtonPressed(int id) {
+        outStream.println("delete " + id);
+        onDisplayAllProductsButtonPressed();
     }
 
-    public void onCreateButtonPressed(){
+    public void onCreateButtonPressed() {
         CreateDialogue createDialog = new CreateDialogue(this);
-
         createDialog.showAndWait();
     }
 
-    public void onConfirmCreateButtonPressed(Product newProduct){
-        //send a request to create to the server
+    public void onConfirmCreateButtonPressed(Product newProduct) {
         String productJSON = ProductJsonConverter.productToJsonString(newProduct);
-        String request = "create " + productJSON.replace('\n', ' '); //need to remove new lines as server reads a line at a time
-        this.outStream.println(request);
+        String request = "create " + productJSON.replace('\n', ' ');
+        outStream.println(request);
 
-        this.onDisplayAllProductsButtonPressed();
+        onDisplayAllProductsButtonPressed();
     }
 
-    public void onEditButtonPressed(Product product){
+    public void onEditButtonPressed(Product product) {
         EditDialogue editDialog = new EditDialogue(this, product);
         editDialog.showAndWait();
     }
 
-    public void onConfirmEditButtonPressed(Product product){
-        //send a request to edit to the server
+    public void onConfirmEditButtonPressed(Product product) {
         String productJSON = ProductJsonConverter.productToJsonString(product);
-        String request = "update " + productJSON.replace('\n', ' '); //need to remove new lines as server reads a line at a time
-        this.outStream.println(request);
+        String request = "update " + productJSON.replace('\n', ' ');
+        outStream.println(request);
 
-        this.onDisplayAllProductsButtonPressed();
+        onDisplayAllProductsButtonPressed();
     }
 
+    @FXML
+    protected void onGetImagesButtonPressed() {
+        try {
+            outStream.println("get images");
 
+            StringBuilder imagesJson = new StringBuilder();
+            String nextLine;
+            while ((nextLine = inStream.readLine()) != null && !nextLine.equals("END")) {
+                imagesJson.append(nextLine).append("\n");
+            }
 
+            JSONArray jsonArray = new JSONArray(imagesJson.toString().trim());
 
+            if (jsonArray.isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("No Images");
+                alert.setHeaderText(null);
+                alert.setContentText("No images available on the server.");
+                alert.showAndWait();
+                return;
+            }
+
+            List<String> imageNames = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                imageNames.add(jsonArray.getString(i));
+            }
+
+            ChoiceDialog<String> dialog = new ChoiceDialog<>(imageNames.get(0), imageNames);
+            dialog.setTitle("Download Image");
+            dialog.setHeaderText("Select an image to download:");
+            dialog.setContentText("Available Images:");
+
+            Optional<String> result = dialog.showAndWait();
+            result.ifPresent(selectedImage -> {
+                downloadImage(selectedImage);
+            });
+
+        } catch (Exception e) {
+            System.out.println("Error while getting images list:");
+            e.printStackTrace();
+        }
+    }
+
+    private void downloadImage(String imageName) {
+        try {
+            outStream.println("get image " + imageName);
+
+            File folder = new File("downloaded_images");
+            if (!folder.exists()) {
+                folder.mkdir();
+            }
+
+            InputStream inputStream = socket.getInputStream();
+            FileOutputStream fileOutputStream = new FileOutputStream("downloaded_images/" + imageName);
+
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+
+            while ((bytesRead = inputStream.read(buffer)) > 0) {
+                fileOutputStream.write(buffer, 0, bytesRead);
+                if (bytesRead < buffer.length) {
+                    break;
+                }
+            }
+
+            fileOutputStream.close();
+
+            javafx.scene.image.Image img = new javafx.scene.image.Image(new FileInputStream("downloaded_images/" + imageName));
+            downloadedImageView.setImage(img);
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Download Complete");
+            alert.setHeaderText(null);
+            alert.setContentText("Image downloaded: downloaded_images/" + imageName);
+            alert.showAndWait();
+
+        } catch (Exception e) {
+            System.out.println("Error downloading image:");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void onExitButtonPressed() {
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Exit");
+            alert.setHeaderText("Are you sure you want to exit?");
+            alert.setContentText("This will disconnect from the server.");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (outStream != null) {
+                    outStream.println("quit");
+                }
+
+                if (inStream != null) {
+                    inStream.close();
+                }
+                if (outStream != null) {
+                    outStream.close();
+                }
+                if (socket != null && !socket.isClosed()) {
+                    socket.close();
+                }
+
+                System.exit(0);
+            }
+
+        } catch (Exception e) {
+            System.out.println("Error while exiting:");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
 
 }
+

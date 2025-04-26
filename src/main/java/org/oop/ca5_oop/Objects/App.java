@@ -148,7 +148,14 @@ public class App {
         System.out.print("Enter product sku: ");
         product_sku = kb.nextLine();
 
-        Product newProduct = new Product(productName, description, price, qtyInStock, product_sku);
+        System.out.print("Enter image file name (or leave empty for 'no_photo.png'): ");
+        String imageName = kb.nextLine();
+        if (imageName.isEmpty()) {
+            imageName = "no_photo.png";
+        }
+
+
+        Product newProduct = new Product(productName, description, price, qtyInStock, product_sku, imageName);
 
         productDao.insertProduct(newProduct);
     }
@@ -182,8 +189,14 @@ public class App {
             int qtyInStock = kb.nextInt();
             kb.nextLine();
 
+            System.out.print("Enter new image file name (or leave empty to keep current '" + product.getImageName() + "'): ");
+            String imageName = kb.nextLine();
+            if (imageName.isEmpty()) {
+                imageName = product.getImageName();
+            }
+
             String productSKU = product.getProduct_sku();
-            Product updatedProduct = new Product(name, description, price, qtyInStock, productSKU);
+            Product updatedProduct = new Product(name, description, price, qtyInStock, productSKU, imageName);
             productDao.updateProduct(id, updatedProduct);
             System.out.println("Successfully updated");
         } catch (DaoException e) {

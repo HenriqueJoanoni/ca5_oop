@@ -7,6 +7,7 @@ public class Product {
     private float price;
     private int qtyInStock;
     private String product_sku;
+    private String imageName;
 
     public Product(
             int productID,
@@ -14,7 +15,8 @@ public class Product {
             String description,
             float price,
             int qtyInStock,
-            String product_sku
+            String product_sku,
+            String imageName
     ) {
         this.productID = productID;
         this.productName = productName;
@@ -22,17 +24,18 @@ public class Product {
         this.price = price;
         this.qtyInStock = qtyInStock;
         this.product_sku = product_sku;
+        this.imageName = imageName;
     }
 
-    //use this for inserting
     public Product(
             String productName,
             String description,
             float price,
             int qtyInStock,
-            String product_sku
+            String product_sku,
+            String imageName
     ) {
-        this(0, productName, description, price, qtyInStock, product_sku);
+        this(0, productName, description, price, qtyInStock, product_sku, imageName);
     }
 
     public Product() {
@@ -86,6 +89,14 @@ public class Product {
         this.product_sku = product_sku;
     }
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
     @Override
     public String toString() {
         return "Product [" +
@@ -94,8 +105,8 @@ public class Product {
                 ", Description: " + description +
                 ", Price: " + String.format("%.2f", price) +
                 ", Quantity in Stock: " + qtyInStock +
-                ", product_sku: " + product_sku
-                + "]";
+                ", SKU: " + product_sku +
+                ", Image Name: " + imageName +
+                "]";
     }
 }
-
