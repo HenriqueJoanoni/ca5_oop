@@ -55,7 +55,7 @@ public class EditDialogue extends Stage {
             }
         });
 
-        VBox dialogueContent = new VBox(10); // 10px spacing
+        VBox dialogueContent = new VBox(10);
         dialogueContent.getChildren().addAll(
                 nameLabel, nameTF,
                 priceLabel, priceTF,

@@ -59,10 +59,10 @@ public class GUIController {
 
     @FXML
     public void initialize() {
-            resultsList.setPrefWidth(1200); // Stretch wide enough (or even 1250)
+            resultsList.setPrefWidth(1200);
             resultsList.setPrefHeight(800);
-            resultsList.setMaxWidth(Double.MAX_VALUE); // 🔥 new: make it fill parent
-            resultsList.setMaxHeight(Double.MAX_VALUE); // 🔥
+            resultsList.setMaxWidth(Double.MAX_VALUE);
+            resultsList.setMaxHeight(Double.MAX_VALUE);
             HBox.setHgrow(resultsList, javafx.scene.layout.Priority.ALWAYS);
         }
 

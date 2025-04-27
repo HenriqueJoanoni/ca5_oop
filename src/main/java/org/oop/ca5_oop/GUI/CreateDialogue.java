@@ -39,7 +39,6 @@ public class CreateDialogue extends Stage {
         Label qtyLabel = new Label("Quantity in Stock:");
         TextField qtyTF = new TextField();
 
-        // 📸 Image Upload
         Label imageLabel = new Label("Product Image:");
         Button uploadImageButton = new Button("Choose Image");
         ImageView selectedImagePreview = new ImageView();
