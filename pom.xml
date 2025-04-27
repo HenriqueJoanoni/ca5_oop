@@ -67,6 +67,12 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.28</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -90,7 +96,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.oop.ca5_oop.GUIAppMain
+                                org.oop.ca5_oop.ClientGUIAppMain
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
@@ -104,6 +110,5 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
 

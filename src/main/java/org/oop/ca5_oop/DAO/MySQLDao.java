@@ -18,7 +18,7 @@ public class MySQLDao {
         String driver = "com.mysql.cj.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/firestrings_oop";
         String username = "root";
-        String password = "";
+        String password = "12345";
         Connection conn = null;
 
         try {

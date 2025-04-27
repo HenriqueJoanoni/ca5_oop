@@ -92,7 +92,8 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                         rs.getString("product_description"),
                         rs.getFloat("product_price"),
                         rs.getInt("qty_in_stock"),
-                        rs.getString("product_sku")
+                        rs.getString("product_sku"),
+                        rs.getString("imageName")
                 );
                 products.add(product);
             }
@@ -106,6 +107,7 @@ public class ProductDao extends MySQLDao implements ProductInterface {
 
     @Override
     public List<Product> listAllProducts() throws DaoException{
+        System.out.println("print new");
         List<Product> products = new ArrayList<>();
         String query = "SELECT * FROM product";
 
@@ -120,10 +122,12 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                 float price = resultSet.getFloat("product_price");
                 int qtyInStock = resultSet.getInt("qty_in_stock");
                 String sku = resultSet.getString("product_sku");
+                String imageName = resultSet.getString("image_name");
 
-                products.add(new Product(id, name, description, price, qtyInStock, sku));
+                products.add(new Product(id, name, description, price, qtyInStock, sku, imageName));
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new DaoException("listAllProducts() " + e.getMessage());
         }
         return products;
@@ -145,8 +149,9 @@ public class ProductDao extends MySQLDao implements ProductInterface {
                 float price = resultSet.getFloat("product_price");
                 int qtyInStock = resultSet.getInt("qty_in_stock");
                 String sku = resultSet.getString("product_sku");
+                String imageName = resultSet.getString("image_name");
 
-                product = new Product(id, name, description, price, qtyInStock, sku);
+                product = new Product(id, name, description, price, qtyInStock, sku, imageName);
             }
         } catch (SQLException e) {
             throw new DaoException("getProductById() " + e.getMessage());
@@ -175,14 +180,15 @@ public class ProductDao extends MySQLDao implements ProductInterface {
     public void insertProduct(Product product){
         try {
             Connection conn = startConnection();
-            String query = "INSERT INTO product (product_name, product_description, product_price, qty_in_stock, product_sku) " +
-                    "VALUES (?, ?, ?, ?, ?);";
+            String query = "INSERT INTO product (product_name, product_description, product_price, qty_in_stock, product_sku, image_name) " +
+                    "VALUES (?, ?, ?, ?, ?, ?);";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, product.getProductName());
             ps.setString(2, product.getDescription());
             ps.setDouble(3, product.getPrice());
             ps.setInt(4, product.getQtyInStock());
             ps.setString(5, product.getProduct_sku());
+            ps.setString(6, product.getImageName());
 
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected > 0){

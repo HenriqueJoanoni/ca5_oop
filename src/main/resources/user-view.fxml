@@ -1,54 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ListView?>
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.ca5_oop.GUI.ResultsController">
-   <children>
-      <AnchorPane prefHeight="600.0" prefWidth="950.0">
-         <children>
-            <VBox layoutX="196.0" layoutY="32.0" prefHeight="60.0" prefWidth="407.0" style="-fx-background-color: #ddd;">
-               <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="FireStrings Product Manager" textAlignment="CENTER" wrappingWidth="410.13751220703125">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </VBox>
-            <ScrollPane layoutX="74.0" layoutY="325.0" prefHeight="239.0" prefWidth="805.0" style="-fx-background-color: #ddd; -fx-border-color: #000;">
-               <content>
-                  <ListView fx:id="resultsList" prefHeight="238.0" prefWidth="780.0">
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.oop.ca5_oop.GUI.GUIController"
+      style="-fx-background-color: black; -fx-padding: 20;"> <!-- dark fire background -->
 
-                  </ListView>
-               </content></ScrollPane>
-            <VBox alignment="CENTER_LEFT" layoutX="76.0" layoutY="101.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="69.0" prefWidth="650.0" style="-fx-background-color: #ddd;">
-               <children>
-                  <Button fx:id="createButton" mnemonicParsing="false" onMousePressed="#onCreateButtonPressed" prefHeight="26.0" prefWidth="120.0" text="Create Product" />
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="productIDTextField" promptText="Product ID" />
-                        <Button fx:id="searchByIDButton" mnemonicParsing="false" onMousePressed="#onSearchByIDButtonPressed" prefHeight="26.0" prefWidth="85.0" text="Search By ID" />
-                     </children>
-                  </HBox>
-                  <Button mnemonicParsing="false" onMousePressed="#onDisplayAllProductsButtonPressed" text="Display All Products" />
-               </children>
-            </VBox>
-            <Text layoutX="76.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results" wrappingWidth="85.60000000000014">
+   <children>
+
+      <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #b22222; -fx-padding: 20; -fx-background-radius: 10;"> <!-- firebrick red -->
+         <children>
+            <Text text="🔥 FireStrings Product Manager 🔥" fill="white" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER">
                <font>
-                  <Font size="26.0" />
+                  <Font size="28"/>
                </font>
             </Text>
          </children>
-      </AnchorPane>
+      </VBox>
+
+      <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-background-color: black; -fx-padding: 15; -fx-background-radius: 10; -fx-border-color: #ff4500;">
+         <children>
+            <Button fx:id="createButton" text="➕ Create Product" onAction="#onCreateButtonPressed" style="-fx-background-color: #ff4500; -fx-text-fill: white;"/>
+            <Button fx:id="displayAllProductsButton" text="🎧 Display Products" onAction="#onDisplayAllProductsButtonPressed" style="-fx-background-color: #ff6347; -fx-text-fill: white;"/>
+            <TextField fx:id="productIDTextField" promptText="Enter Product ID..." prefWidth="150" style="-fx-background-color: #1c1c1c; -fx-text-fill: #ff4500;"/>
+            <Button fx:id="searchByIDButton" text="🔍 Search By ID" onAction="#onSearchByIDButtonPressed" style="-fx-background-color: #ff4500; -fx-text-fill: white;"/>
+            <Button fx:id="refreshButton" text="🔁 Refresh" onAction="#onRefreshButtonPressed" style="-fx-background-color: #ff6347; -fx-text-fill: white;"/>
+            <Button fx:id="getImagesButton" text="📷 Get Images" onAction="#onGetImagesButtonPressed" style="-fx-background-color: #ff4500; -fx-text-fill: white;"/>
+            <Button fx:id="exitButton" text="🚪👋 Exit" onAction="#onExitButtonPressed" style="-fx-background-color: #b22222; -fx-text-fill: white;"/>
+         </children>
+      </HBox>
+
+      <HBox spacing="20">
+         <children>
+
+            <VBox spacing="10" style="-fx-background-color: #1a1a1a; -fx-padding: 15; -fx-background-radius: 10; -fx-border-color: #ff4500; -fx-border-width: 2;" prefWidth="800">
+               <children>
+                  <Text text="🔥 Product List" style="-fx-font-size: 20; -fx-fill: #ff5722;" />
+                  <ListView fx:id="resultsList" style="-fx-background-insets: 0; -fx-background-color: #ffffff;" />
+               </children>
+            </VBox>
+
+
+            <VBox spacing="10" alignment="CENTER" style="-fx-background-color: #1c1c1c; -fx-padding: 15; -fx-background-radius: 10; -fx-border-color: #ff4500;" prefWidth="250">
+               <children>
+                  <Text text="Downloaded Image" style="-fx-font-size: 18; -fx-fill: #ff4500;" />
+                  <ImageView fx:id="downloadedImageView" fitHeight="200" fitWidth="200" preserveRatio="true" />
+               </children>
+            </VBox>
+
+         </children>
+      </HBox>
+
    </children>
+
 </VBox>
